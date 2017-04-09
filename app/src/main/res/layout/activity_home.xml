@@ -25,10 +25,9 @@
         android:text="Take Picture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="115dp"
-        android:layout_marginBottom="26dp"
+        android:layout_marginBottom="28dp"
         android:id="@+id/button"
-        android:onClick="dispatchTakePictureIntent"/>
+        android:onClick="dispatchTakePictureIntent"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
