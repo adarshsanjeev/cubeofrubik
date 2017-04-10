@@ -1,5 +1,6 @@
 package com.example.improbable.cubeofrubik;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class CubeActivity extends AppCompatActivity {
 
@@ -17,6 +20,7 @@ public class CubeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cube);
         move = 0;
+        displayCube(findViewById(R.id.a00));
     }
     public void displayCube(View view) {
         ((TextView)findViewById(R.id.a03)).setText((Character.toString(Engine.a[5][0][0])));
@@ -88,6 +92,26 @@ public class CubeActivity extends AppCompatActivity {
         ((TextView)findViewById(R.id.a113)).setText((Character.toString(Engine.a[4][2][0])));
         ((TextView)findViewById(R.id.a114)).setText((Character.toString(Engine.a[4][2][1])));
         ((TextView)findViewById(R.id.a115)).setText((Character.toString(Engine.a[4][2][2])));
+        for (int i=0; i<12; i++)
+            for (int j=0; j<9; j++) {
+                int resID = getResources().getIdentifier("a"+i+j, "id", getPackageName());
+                TextView tV = ((TextView) findViewById(resID));
+                Log.d("TAGA", "a"+i+j);
+                if (tV.getText().toString().equals("R"))
+                    tV.setBackgroundColor(Color.parseColor("#FF0000"));
+                if (tV.getText().toString().equals("B"))
+                    tV.setBackgroundColor(Color.parseColor("#0000FF"));
+                if (tV.getText().toString().equals("G"))
+                    tV.setBackgroundColor(Color.parseColor("#00FF00"));
+                if (tV.getText().toString().equals("Y"))
+                    tV.setBackgroundColor(Color.parseColor("#FFFF00"));
+                if (tV.getText().toString().equals("O"))
+                    tV.setBackgroundColor(Color.parseColor("#FFA500"));
+                if (tV.getText().toString().equals("W"))
+                    tV.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                if (tV.getText().toString().equals(" "))
+                    tV.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            }
     }
     public void doScramble(View view) {
         try{
@@ -102,21 +126,36 @@ public class CubeActivity extends AppCompatActivity {
 
     public void doSolve(View view) {
         try {
+            Engine.moves_list = new ArrayList<>();
+            Engine.solve();
+            Log.d("ABA", Engine.moves_list.size()+">");
+            for (int i=0; i<Engine.moves_list.size(); i++) {
+                Log.d("ABA", i+"<"+Engine.moves_list.get(i));
+                Engine.move(Engine.moves_list.get(i));
+            }
+            displayCube(findViewById(R.id.solve));
+
+            /*
             if (move >= Engine.moves_list.size()) {
                 ((Button) findViewById(R.id.solve)).setText("Next");
+                ((Button) findViewById(R.id.scramble)).setEnabled(false);
+                Engine.moves_list = new ArrayList<>();
                 Engine.solve();
                 move = 0;
+                ((TextView) findViewById(R.id.moves)).setText(Engine.moves_list.get(move)+" ("+(move+1)+"/"+Engine.moves_list.size()+")");
+                Engine.move(Engine.moves_list.get(move));
                 displayCube(findViewById(R.id.a00));
-                ((TextView) findViewById(R.id.moves)).setText(Engine.moves_list.get(move));
             }
             else {
-                ((TextView) findViewById(R.id.moves)).setText(Engine.moves_list.get(move));
+                ((TextView) findViewById(R.id.moves)).setText(Engine.moves_list.get(move)+" ("+(move+1)+"/"+Engine.moves_list.size()+")");
+                Engine.move(Engine.moves_list.get(move));
+                displayCube(findViewById(R.id.a00));
                 move += 1;
                 if (move >= Engine.moves_list.size()) {
                     ((Button) findViewById(R.id.solve)).setText("Solve");
-                    
+
                 }
-            }
+            }*/
         }
         catch (Exception e)
         {

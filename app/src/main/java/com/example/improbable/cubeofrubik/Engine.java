@@ -11,6 +11,7 @@ public class Engine {
     static ArrayList<Integer> step_moves_list;
     static int solution_length = 0;
     static char[][][] a;
+    static char[][][] b;
 
     // creates a 3d list representing a solved cube
     public static char[][][] make_cube() {
@@ -45,6 +46,7 @@ public class Engine {
 
     public static void main() {
         a = make_cube();
+        b = make_cube();
         //System.out.println("Before");
         // print_cube();
         // scramble(25);
@@ -1660,14 +1662,27 @@ public class Engine {
         return uside && fside && rside && lside && dside && bside;
     }
 
+    public static void clonea2b() {
+        for(int i=0; i<6; i++)
+            for (int j=0; j<3; j++)
+                for (int k=0; k<3; k++)
+                    a[i][j][k] = b[i][j][k];
+    }
+
+    public static void cloneb2a() {
+        for(int i=0; i<6; i++)
+            for (int j=0; j<3; j++)
+                for (int k=0; k<3; k++)
+                    b[i][j][k] = a[i][j][k];
+    }
+
     public static void solve() throws Exception {
+        cloneb2a();
         cross();
         simplify_moves();
         step_moves_list.set(0,solution_length);
         f2l();
         simplify_moves();
-        System.out.println("After moves");
-        // print_cube();
         step_moves_list.set(1,solution_length - step_moves_list.get(0));
         topCross();
         getfish();
@@ -1676,6 +1691,7 @@ public class Engine {
         step_moves_list.set(2,solution_length - step_moves_list.get(1) - step_moves_list.get(0));
         bPLL();
         simplify_moves();
+        clonea2b();
         step_moves_list.set(3,solution_length - step_moves_list.get(2) - step_moves_list.get(1) - step_moves_list.get(0));
         // assert (isSolved()); // check this
     }
