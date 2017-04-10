@@ -1,16 +1,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/RelativeLayout1"
+    android:id="@+id/RelativeLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:gravity="center"
     android:orientation="vertical" >
 
 <TableLayout
+        android:id="@+id/table"
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:shrinkColumns="*"  android:stretchColumns="*" android:background="#ffffff"
-        android:layout_alignParentBottom="true">
+        android:layout_height="wrap_content"
+        android:shrinkColumns="*"  android:stretchColumns="*" android:background="#ffffff">
 
     <!-- Row 2 with 3 columns -->
     <TableRow
@@ -735,26 +735,33 @@
              android:textColor="#000000"
              android:padding="1dip" android:gravity="center"/>
      </TableRow>
-    <TableRow
-        android:weightSum="5">
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:onClick="doScramble"
-            android:text="Scramble"
-            android:layout_weight="1"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:onClick="displayCube"
-            android:text="Hello"
-            android:layout_weight="3"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:onClick="doSolve"
-            android:text="Solve"
-            android:layout_weight="1"/>
-    </TableRow>
  </TableLayout>
- </RelativeLayout>
+    <LinearLayout
+        android:layout_below="@id/table"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:onClick="doScramble"
+                android:text="Scramble"/>
+            <TextView
+                android:id="@+id/moves"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="149dp"
+                android:onClick="displayCube"
+                android:text=""/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/solve"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:onClick="doSolve"
+        android:text="Solve"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+</RelativeLayout>

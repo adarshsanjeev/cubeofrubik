@@ -2,15 +2,21 @@ package com.example.improbable.cubeofrubik;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class CubeActivity extends AppCompatActivity {
+
+    public int move = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cube);
+        move = 0;
     }
     public void displayCube(View view) {
         ((TextView)findViewById(R.id.a03)).setText((Character.toString(Engine.a[5][0][0])));
@@ -93,10 +99,24 @@ public class CubeActivity extends AppCompatActivity {
 
         }
     }
+
     public void doSolve(View view) {
-        try{
-            Engine.solve();
-            displayCube(findViewById(R.id.a00));
+        try {
+            if (move >= Engine.moves_list.size()) {
+                ((Button) findViewById(R.id.solve)).setText("Next");
+                Engine.solve();
+                move = 0;
+                displayCube(findViewById(R.id.a00));
+                ((TextView) findViewById(R.id.moves)).setText(Engine.moves_list.get(move));
+            }
+            else {
+                ((TextView) findViewById(R.id.moves)).setText(Engine.moves_list.get(move));
+                move += 1;
+                if (move >= Engine.moves_list.size()) {
+                    ((Button) findViewById(R.id.solve)).setText("Solve");
+                    
+                }
+            }
         }
         catch (Exception e)
         {
