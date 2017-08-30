@@ -7,19 +7,18 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class CubeActivity extends AppCompatActivity {
 
-    public int move = 0;
+    public int move;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cube);
-        move = 0;
+        move = 1000;
         displayCube(findViewById(R.id.a00));
     }
     public void displayCube(View view) {
@@ -117,34 +116,24 @@ public class CubeActivity extends AppCompatActivity {
         try{
             Engine.scramble(25);
             displayCube(findViewById(R.id.a00));
+            ((Button) findViewById(R.id.scramble)).setEnabled(false);
+            ((Button) findViewById(R.id.solve)).setEnabled(true);
         }
         catch (Exception e)
         {
-
         }
     }
 
     public void doSolve(View view) {
         try {
-            Engine.moves_list = new ArrayList<>();
-            Engine.solve();
-            Log.d("ABA", Engine.moves_list.size()+">");
-            for (int i=0; i<Engine.moves_list.size(); i++) {
-                Log.d("ABA", i+"<"+Engine.moves_list.get(i));
-                Engine.move(Engine.moves_list.get(i));
-            }
-            displayCube(findViewById(R.id.solve));
 
-            /*
             if (move >= Engine.moves_list.size()) {
-                ((Button) findViewById(R.id.solve)).setText("Next");
-                ((Button) findViewById(R.id.scramble)).setEnabled(false);
                 Engine.moves_list = new ArrayList<>();
                 Engine.solve();
+                ((Button) findViewById(R.id.solve)).setText("Next");
+                ((Button) findViewById(R.id.scramble)).setEnabled(false);
                 move = 0;
-                ((TextView) findViewById(R.id.moves)).setText(Engine.moves_list.get(move)+" ("+(move+1)+"/"+Engine.moves_list.size()+")");
-                Engine.move(Engine.moves_list.get(move));
-                displayCube(findViewById(R.id.a00));
+                ((TextView) findViewById(R.id.moves)).setText("Solved in "+Engine.moves_list.size()+" steps. Click next to go through it");
             }
             else {
                 ((TextView) findViewById(R.id.moves)).setText(Engine.moves_list.get(move)+" ("+(move+1)+"/"+Engine.moves_list.size()+")");
@@ -153,9 +142,10 @@ public class CubeActivity extends AppCompatActivity {
                 move += 1;
                 if (move >= Engine.moves_list.size()) {
                     ((Button) findViewById(R.id.solve)).setText("Solve");
-
+                    ((Button) findViewById(R.id.scramble)).setEnabled(true);
+                    ((Button) findViewById(R.id.solve)).setEnabled(false);
                 }
-            }*/
+            }
         }
         catch (Exception e)
         {
