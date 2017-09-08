@@ -1,13 +1,24 @@
 package com.example.improbable.cubeofrubik;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 public class CubeActivity extends AppCompatActivity {
@@ -113,7 +124,31 @@ public class CubeActivity extends AppCompatActivity {
             }
     }
     public void doScramble(View view) {
-        try{
+        String ret = "";
+
+        try {
+            InputStream inputStream = this.openFileInput("config.txt");
+
+            if ( inputStream != null ) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+
+                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                    stringBuilder.append(receiveString);
+                }
+
+                inputStream.close();
+                ret = stringBuilder.toString();
+            }
+        }
+        catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        }
+        /*try{
             Engine.scramble(25);
             displayCube(findViewById(R.id.a00));
             ((Button) findViewById(R.id.scramble)).setEnabled(false);
@@ -121,12 +156,23 @@ public class CubeActivity extends AppCompatActivity {
         }
         catch (Exception e)
         {
-        }
+        }*/
+        Toast.makeText(this, ret, Toast.LENGTH_LONG).show();
     }
 
     public void doSolve(View view) {
-        try {
+        String data = Engine.playerMoveList;
+        Toast.makeText(this, data, Toast.LENGTH_LONG).show();
 
+        try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(this.openFileOutput("config.txt", Context.MODE_PRIVATE));
+            outputStreamWriter.write(data);
+            outputStreamWriter.close();
+        }
+        catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
+        /*try {
             if (move >= Engine.moves_list.size()) {
                 Engine.moves_list = new ArrayList<>();
                 Engine.solve();
@@ -150,6 +196,65 @@ public class CubeActivity extends AppCompatActivity {
         catch (Exception e)
         {
 
+        }*/
+    }
+
+    public void addToList(String data)
+    {
+        Engine.playerMoveList += data+";";
+    }
+
+    public void doMovement(View view) throws Exception {
+        switch (view.getId()) {
+            case (R.id.li):
+                Engine.move("li");
+                addToList("li");
+                break;
+            case (R.id.l):
+                Engine.move("l");
+                addToList("l");
+                break;
+            case (R.id.r):
+                Engine.move("r");
+                addToList("r");
+                break;
+            case (R.id.ri):
+                Engine.move("ri");
+                addToList("ri");
+                break;
+            case (R.id.bi):
+                Engine.move("bi");
+                addToList("bi");
+                break;
+            case (R.id.b):
+                Engine.move("b");
+                addToList("b");
+                break;
+            case (R.id.u):
+                Engine.move("u");
+                addToList("u");
+                break;
+            case (R.id.ui):
+                Engine.move("ui");
+                addToList("ui");
+                break;
+            case (R.id.d):
+                Engine.move("d");
+                addToList("d");
+                break;
+            case (R.id.di):
+                Engine.move("di");
+                addToList("di");
+                break;
+            case (R.id.f):
+                Engine.move("f");
+                addToList("f");
+                break;
+            case (R.id.fi):
+                Engine.move("fi");
+                addToList("fi");
+                break;
         }
+        displayCube(view);
     }
 }

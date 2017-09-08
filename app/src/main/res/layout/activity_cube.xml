@@ -747,7 +747,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:onClick="doScramble"
-                android:text="Scramble"/>
+                android:text="Scramble" />
             <TextView
                 android:id="@+id/moves"
                 android:gravity="center"
@@ -763,120 +763,133 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:onClick="doSolve"
-        android:text="Solve"
+        android:text="Done"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/li"
         style="@style/Widget.AppCompat.Button.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/linearLayout"
-        android:text="L'" />
+        android:text="L'"
+        android:onClick="doMovement"/>
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/bi"
+        style="@style/Widget.AppCompat.Button.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="B'"
+        android:onClick="doMovement"
+        android:layout_alignBaseline="@+id/li"
+        android:layout_alignBottom="@+id/li"
+        android:layout_toEndOf="@+id/li" />
+
+    <Button
+        android:id="@+id/b"
         style="@style/Widget.AppCompat.Button.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout"
-        android:layout_toEndOf="@+id/button3"
-        android:text="B'" />
+        android:layout_toStartOf="@+id/ri"
+        android:text="B"
+        android:onClick="doMovement" />
 
     <Button
-        android:id="@+id/button5"
-        style="@style/Widget.AppCompat.Button.Small"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayout"
-        android:layout_toStartOf="@+id/button6"
-        android:text="B" />
-
-    <Button
-        android:id="@+id/button6"
+        android:id="@+id/ri"
         style="@style/Widget.AppCompat.Button.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/linearLayout"
-        android:text="R'" />
+        android:text="R'"
+        android:onClick="doMovement" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/l"
         style="@style/Widget.AppCompat.Button.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/button3"
+        android:layout_below="@+id/li"
         android:layout_marginTop="18dp"
-        android:text="L" />
+        android:text="L"
+        android:onClick="doMovement" />
 
     <Button
-        android:id="@+id/button8"
+        android:id="@+id/fi"
         style="@style/Widget.AppCompat.Button.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/button4"
-        android:layout_alignTop="@+id/button7"
-        android:text="F'" />
+        android:layout_alignEnd="@+id/bi"
+        android:layout_alignTop="@+id/l"
+        android:text="F'"
+        android:onClick="doMovement" />
 
     <Button
-        android:id="@+id/button9"
+        android:id="@+id/f"
         style="@style/Widget.AppCompat.Button.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/button8"
-        android:layout_toStartOf="@+id/button6"
-        android:text="F" />
+        android:layout_alignBottom="@+id/fi"
+        android:layout_toStartOf="@+id/ri"
+        android:text="F"
+        android:onClick="doMovement" />
 
     <Button
-        android:id="@+id/button10"
+        android:id="@+id/r"
         style="@style/Widget.AppCompat.Button.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/button9"
-        android:layout_toEndOf="@+id/button9"
-        android:text="R" />
+        android:layout_alignTop="@+id/f"
+        android:layout_toEndOf="@+id/f"
+        android:text="R"
+        android:onClick="doMovement" />
 
     <Button
-        android:id="@+id/button11"
+        android:id="@+id/u"
         style="@style/Widget.AppCompat.Button.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="U"
         android:layout_marginEnd="27dp"
         android:layout_below="@+id/linearLayout"
-        android:layout_toStartOf="@+id/button12" />
+        android:layout_toStartOf="@+id/ui"
+        android:onClick="doMovement" />
 
     <Button
-        android:id="@+id/button12"
+        android:id="@+id/ui"
         style="@style/Widget.AppCompat.Button.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="U'"
         android:layout_below="@+id/linearLayout"
-        android:layout_alignStart="@+id/button14" />
+        android:layout_alignStart="@+id/di"
+        android:onClick="doMovement"/>
 
     <Button
-        android:id="@+id/button13"
+        android:id="@+id/d"
         style="@style/Widget.AppCompat.Button.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="D"
-        android:layout_alignBaseline="@+id/button14"
-        android:layout_alignBottom="@+id/button14"
-        android:layout_alignStart="@+id/button11" />
+        android:layout_alignBaseline="@+id/di"
+        android:layout_alignBottom="@+id/di"
+        android:layout_alignStart="@+id/u"
+        android:onClick="doMovement" />
 
     <Button
-        android:id="@+id/button14"
+        android:id="@+id/di"
         style="@style/Widget.AppCompat.Button.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="D'"
-        android:layout_alignBaseline="@+id/button9"
-        android:layout_alignBottom="@+id/button9"
-        android:layout_toStartOf="@+id/button9"
-        android:layout_marginEnd="36dp" />
+        android:layout_alignBaseline="@+id/f"
+        android:layout_alignBottom="@+id/f"
+        android:layout_toStartOf="@+id/f"
+        android:layout_marginEnd="36dp"
+        android:onClick="doMovement"/>
 </RelativeLayout>

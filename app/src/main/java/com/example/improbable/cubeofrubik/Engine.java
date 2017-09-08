@@ -12,35 +12,36 @@ public class Engine {
     static int solution_length = 0;
     static char[][][] a;
     static char[][][] b;
+    static String playerMoveList = "";
 
     // creates a 3d list representing a solved cube
     public static char[][][] make_cube() {
         step_moves_list = new ArrayList<>(Arrays.asList(0, 0, 0, 0));
         f2l_list = new ArrayList<>();
         moves_list = new ArrayList<>();
-        char[][][] a = {   {{'W', 'W', 'W'},
-         					{'W', 'W', 'W'},
-         					{'W', 'W', 'W'}}, //Up/white
+        char[][][] a = {   {{'R', 'G', 'R'},
+         					{'B', 'B', 'R'},
+         					{'G', 'G', 'B'}}, //Up/white
 
-         				   {{'G', 'G', 'G'},
-         					{'G', 'G', 'G'},
-         					{'G', 'G', 'G'}}, //front/green
+         				   {{'R', 'R', 'Y'},
+         					{'G', 'W', 'O'},
+         					{'R', 'B', 'B'}}, //front/green
 
-         				   {{'R', 'R', 'R'},
-         					{'R', 'R', 'R'},
-         					{'R', 'R', 'R'}}, //right/red
+         				   {{'O', 'W', 'Y'},
+         					{'W', 'R', 'B'},
+         					{'W', 'G', 'O'}}, //right/red
 
-         				   {{'O', 'O', 'O'},
-         					{'O', 'O', 'O'},
-         					{'O', 'O', 'O'}}, //left/orange
+         				   {{'W', 'W', 'Y'},
+         					{'R', 'O', 'Y'},
+         					{'W', 'R', 'W'}}, //left/orange
 
-         				   {{'Y', 'Y', 'Y'},
-         					{'Y', 'Y', 'Y'},
-         					{'Y', 'Y', 'Y'}}, //down/yellow
+         				   {{'G', 'O', 'O'},
+         					{'Y', 'G', 'W'},
+         					{'G', 'O', 'Y'}}, //down/yellow
 
-         				   {{'B', 'B', 'B'},
-         					{'B', 'B', 'B'},
-         					{'B', 'B', 'B'}}}; //back/blue
+         				   {{'O', 'Y', 'G'},
+         					{'B', 'Y', 'Y'},
+         					{'B', 'O', 'B'}}}; //back/blue
         return a;
     }
 

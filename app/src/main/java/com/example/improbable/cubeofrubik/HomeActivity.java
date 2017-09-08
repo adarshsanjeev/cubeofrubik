@@ -2,11 +2,18 @@ package com.example.improbable.cubeofrubik;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -17,7 +24,6 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Engine.main();
-
     }
 
     public void dispatchTakePictureIntent(View view) {
@@ -26,6 +32,26 @@ public class HomeActivity extends AppCompatActivity {
         //    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         //}
         Intent intent = new Intent(this, CubeActivity.class);
+        //create file
+        File file = new File("filename");
+
+        //Read text from file
+        StringBuilder text = new StringBuilder();
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                text.append(line);
+                text.append('\n');
+            }
+            br.close();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        // Toast.makeText(this, text.toString(), Toast.LENGTH_LONG).show();
         startActivity(intent);
     }
     @Override
