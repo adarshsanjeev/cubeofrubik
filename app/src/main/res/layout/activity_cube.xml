@@ -747,7 +747,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:onClick="doScramble"
-                android:text="Scramble" />
+                android:text="Send"
+                android:visibility="invisible"/>
             <TextView
                 android:id="@+id/moves"
                 android:gravity="center"

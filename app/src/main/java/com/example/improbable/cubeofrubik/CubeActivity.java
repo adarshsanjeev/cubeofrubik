@@ -1,6 +1,7 @@
 package com.example.improbable.cubeofrubik;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -164,14 +165,21 @@ public class CubeActivity extends AppCompatActivity {
         String data = Engine.playerMoveList;
         Toast.makeText(this, data, Toast.LENGTH_LONG).show();
 
-        try {
+        /*try {
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(this.openFileOutput("config.txt", Context.MODE_PRIVATE));
             outputStreamWriter.write(data);
             outputStreamWriter.close();
+
         }
         catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
-        }
+        }*/
+
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, data);
+        sendIntent.setType("text/plain");
+        startActivity(sendIntent);
         /*try {
             if (move >= Engine.moves_list.size()) {
                 Engine.moves_list = new ArrayList<>();
